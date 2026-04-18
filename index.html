@@ -1,0 +1,253 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.screen { display: none; font-family: var(--font-sans); max-width: 420px; margin: 0 auto; padding: 1rem; }
+.screen.active { display: block; }
+.intro-hero { background: #EAF3DE; border-radius: 20px; padding: 2rem 1.5rem 1.5rem; margin-bottom: 1rem; text-align: center; border: 2px solid #97C459; }
+.intro-title { font-size: 26px; font-weight: 500; color: #173404; margin-bottom: 2px; }
+.intro-title2 { font-size: 13px; font-weight: 500; color: #3B6D11; letter-spacing: 0.05em; margin-bottom: 1rem; }
+.intro-sub { font-size: 15px; color: #27500A; line-height: 1.6; margin-bottom: 1rem; }
+.location-row { display: inline-flex; align-items: center; gap: 6px; background: #C0DD97; border-radius: 999px; padding: 5px 14px; font-size: 13px; color: #173404; font-weight: 500; margin-bottom: 1rem; }
+.location-dot { width: 7px; height: 7px; border-radius: 50%; background: #3B6D11; display: inline-block; }
+.badges-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.badge { padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 500; border: 2px solid transparent; }
+.b-green { background: #639922; color: #EAF3DE; border-color: #3B6D11; }
+.b-blue { background: #378ADD; color: #E6F1FB; border-color: #185FA5; }
+.b-amber { background: #EF9F27; color: #412402; border-color: #BA7517; }
+.story-card { background: #fff; border-radius: 16px; border: 2px solid #C0DD97; padding: 1.25rem; margin-bottom: 1.25rem; text-align: left; }
+.story-card p { font-size: 14px; color: #27500A; line-height: 1.75; }
+.story-card p span { font-weight: 500; color: #173404; }
+.btn-row { display: flex; gap: 8px; }
+.start-btn { flex: 2; padding: 16px; background: #639922; color: #000; border: 2px solid #3B6D11; border-radius: 14px; font-size: 17px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.start-btn:active { transform: scale(0.98); }
+.signup-btn-intro { flex: 1; padding: 16px; background: #378ADD; color: #000; border: 2px solid #185FA5; border-radius: 14px; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.signup-btn-intro:active { transform: scale(0.98); }
+.header { border-radius: 16px; padding: 1rem; margin-bottom: 1rem; text-align: center; background: #EAF3DE; border: 2px solid #97C459; }
+.biz-name { font-size: 17px; font-weight: 500; color: #173404; }
+.biz-tagline { font-size: 12px; color: #3B6D11; margin-top: 2px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+.stat { border-radius: 12px; padding: 10px; text-align: center; }
+.stat:nth-child(1) { background: #EAF3DE; border: 2px solid #97C459; }
+.stat:nth-child(2) { background: #E6F1FB; border: 2px solid #85B7EB; }
+.stat:nth-child(3) { background: #FAEEDA; border: 2px solid #FAC775; }
+.stat-num { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.stat-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.tabs { display: flex; gap: 6px; margin-bottom: 1rem; }
+.tab { flex: 1; padding: 9px 4px; border: 2px solid #C0DD97; border-radius: 10px; background: transparent; cursor: pointer; font-size: 12px; font-weight: 500; color: #3B6D11; transition: all 0.15s; }
+.tab.active { background: #639922; color: #EAF3DE; border-color: #3B6D11; }
+.section { display: none; }
+.section.active { display: block; }
+.card { background: var(--color-background-primary); border-radius: 14px; border: 2px solid #C0DD97; padding: 1.25rem; margin-bottom: 10px; }
+.card h3 { font-size: 15px; font-weight: 500; margin-bottom: 12px; color: #173404; }
+.amount-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.amount-btn { padding: 14px; border: 2px solid #C0DD97; border-radius: 10px; background: #EAF3DE; cursor: pointer; font-size: 15px; font-weight: 500; color: #27500A; transition: all 0.15s; }
+.amount-btn.selected { background: #639922; color: #EAF3DE; border-color: #3B6D11; }
+.custom-row { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+.custom-row label { font-size: 13px; color: var(--color-text-secondary); white-space: nowrap; }
+input[type=number], input[type=text], textarea, select { width: 100%; padding: 8px 10px; border: 2px solid #C0DD97; border-radius: 10px; background: var(--color-background-primary); color: var(--color-text-primary); font-size: 14px; font-family: var(--font-sans); outline: none; }
+input:focus, textarea:focus, select:focus { border-color: #639922; }
+textarea { resize: none; min-height: 72px; line-height: 1.5; }
+.pay-btn { width: 100%; padding: 13px; background: #639922; color: #EAF3DE; border: 2px solid #3B6D11; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.pay-methods { display: flex; gap: 10px; margin-bottom: 12px; }
+.pay-method { flex: 1; padding: 12px 4px; border: 2px solid #C0DD97; border-radius: 10px; text-align: center; cursor: pointer; font-size: 13px; color: #27500A; background: #EAF3DE; transition: all 0.15s; }
+.pay-method.sel { border-color: #185FA5; color: #0C447C; background: #E6F1FB; }
+.pay-method-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+.review-card { background: var(--color-background-primary); border-radius: 14px; border: 2px solid #C0DD97; padding: 1rem; margin-bottom: 8px; }
+.review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.reviewer-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.stars-display { color: #EF9F27; font-size: 14px; }
+.review-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+.review-date { font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px; }
+.star-pick { display: flex; gap: 6px; margin-bottom: 12px; }
+.star-btn { font-size: 24px; background: none; border: none; cursor: pointer; opacity: 0.25; transition: opacity 0.1s, transform 0.1s; }
+.star-btn.lit { opacity: 1; transform: scale(1.15); }
+.submit-btn { width: 100%; padding: 13px; background: #378ADD; color: #E6F1FB; border: 2px solid #185FA5; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; }
+.job-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #C0DD97; }
+.job-row:last-child { border-bottom: none; }
+.job-name { font-size: 14px; color: var(--color-text-primary); }
+.job-detail { font-size: 12px; color: var(--color-text-secondary); }
+.job-amt { font-size: 14px; font-weight: 500; color: #3B6D11; background: #EAF3DE; padding: 3px 10px; border-radius: 999px; border: 1px solid #97C459; }
+.empty-state { text-align: center; padding: 2rem 1rem; color: var(--color-text-secondary); font-size: 14px; }
+.toast { background: #639922; color: #EAF3DE; border: 2px solid #3B6D11; padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 500; margin-top: 1rem; text-align: center; display: none; }
+.back-btn { background: none; border: none; color: #3B6D11; font-size: 13px; cursor: pointer; padding: 0 0 8px 0; font-weight: 500; }
+.method-info-box { font-size:13px; color:#27500A; margin-bottom:12px; padding:8px 12px; background:#EAF3DE; border-radius:10px; border: 1px solid #C0DD97; }
+.signup-hero { background: #E6F1FB; border-radius: 20px; padding: 1.5rem; border: 2px solid #85B7EB; margin-bottom: 1rem; }
+.signup-hero h2 { font-size: 20px; font-weight: 500; color: #042C53; margin-bottom: 4px; }
+.signup-hero p { font-size: 14px; color: #185FA5; margin-bottom: 0; }
+.form-field { margin-bottom: 12px; }
+.form-field label { font-size: 13px; color: #0C447C; font-weight: 500; display: block; margin-bottom: 4px; }
+.signup-submit { width: 100%; padding: 14px; background: #378ADD; color: #E6F1FB; border: 2px solid #185FA5; border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.15s; margin-top: 4px; }
+.signup-submit:active { transform: scale(0.98); }
+.success-card { background: #EAF3DE; border-radius: 16px; border: 2px solid #97C459; padding: 2rem; text-align: center; }
+.success-card .check { font-size: 48px; margin-bottom: 12px; }
+.success-card h3 { font-size: 20px; font-weight: 500; color: #173404; margin-bottom: 8px; }
+.success-card p { font-size: 14px; color: #27500A; line-height: 1.6; margin-bottom: 1.25rem; }
+.back-home-btn { width: 100%; padding: 13px; background: #639922; color: #EAF3DE; border: 2px solid #3B6D11; border-radius: 12px; font-size: 15px; font-weight: 500; cursor: pointer; }
+.signup-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #C0DD97; }
+.signup-row:last-child { border-bottom: none; }
+.signup-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.signup-detail { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+.new-badge { font-size: 11px; background: #378ADD; color: #E6F1FB; padding: 2px 8px; border-radius: 999px; }
+</style>
+
+<div id="intro" class="screen active">
+  <div class="intro-hero">
+    <svg width="200" height="134" viewBox="0 0 200 134" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 1rem;">
+      <g transform="translate(20,8)"><rect x="8" y="8" width="60" height="7" rx="3.5" fill="#3B6D11"/><rect x="19" y="3" width="38" height="7" rx="3.5" fill="#3B6D11"/><rect x="10" y="15" width="56" height="72" rx="6" fill="#639922"/><rect x="10" y="15" width="56" height="12" rx="4" fill="#3B6D11"/><rect x="15" y="33" width="46" height="5" rx="2.5" fill="#3B6D11" opacity="0.35"/><rect x="15" y="44" width="46" height="5" rx="2.5" fill="#3B6D11" opacity="0.35"/><rect x="15" y="55" width="46" height="5" rx="2.5" fill="#3B6D11" opacity="0.35"/><rect x="10" y="79" width="56" height="8" rx="0" fill="#3B6D11" opacity="0.45"/><rect x="28" y="21" width="20" height="4" rx="2" fill="#C0DD97"/></g>
+      <g transform="translate(108,8)"><rect x="8" y="8" width="60" height="7" rx="3.5" fill="#185FA5"/><rect x="19" y="3" width="38" height="7" rx="3.5" fill="#185FA5"/><rect x="10" y="15" width="56" height="72" rx="6" fill="#378ADD"/><rect x="10" y="15" width="56" height="12" rx="4" fill="#185FA5"/><rect x="15" y="33" width="46" height="5" rx="2.5" fill="#185FA5" opacity="0.35"/><rect x="15" y="44" width="46" height="5" rx="2.5" fill="#185FA5" opacity="0.35"/><rect x="15" y="55" width="46" height="5" rx="2.5" fill="#185FA5" opacity="0.35"/><rect x="10" y="79" width="56" height="8" rx="0" fill="#185FA5" opacity="0.45"/><g transform="translate(28,20)"><path d="M9 2.5 L18 2.5 L14.5 0 M18 2.5 L14.5 5" fill="none" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 7.5 L9 7.5 L12.5 5 M9 7.5 L12.5 10" fill="none" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+      <text x="48" y="122" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="500" fill="#3B6D11">trash</text>
+      <text x="148" y="122" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="500" fill="#185FA5">recycle</text>
+    </svg>
+    <div class="intro-title">Kid's Curbside Service</div>
+    <div class="intro-title2">Moon Valley · Phoenix, Arizona</div>
+    <div class="intro-sub">Your neighborhood trash can service — run by 2 young entrepreneurs!</div>
+    <div class="location-row"><span class="location-dot"></span>Serving Moon Valley, Phoenix AZ only</div>
+    <div class="badges-row">
+      <span class="badge b-green">$1 per can</span>
+      <span class="badge b-blue">2 years in business</span>
+      <span class="badge b-amber">1,300 cans moved</span>
+    </div>
+    <div class="story-card">
+      <p>Hi! We are <span>2 kid entrepreneurs</span> from <span>Moon Valley, Phoenix</span>. We take your trash and recycling cans to the curb on pickup day and bring them back — so you don't have to! It's just <span>$1 per can</span> and we've been doing this for <span>2 years</span>. We work hard and really appreciate your support!</p>
+    </div>
+    <div class="btn-row">
+      <button class="start-btn" onclick="goToApp()">Let's go! →</button>
+      <button class="signup-btn-intro" onclick="goToSignup()">Sign up</button>
+    </div>
+  </div>
+</div>
+
+<div id="signup" class="screen">
+  <button class="back-btn" onclick="goToIntro()">← back to home</button>
+  <div id="signup-form-view">
+    <div class="signup-hero">
+      <h2>Sign up for service!</h2>
+      <p>Fill this out and we'll add you to our route. We'll come by on trash day!</p>
+    </div>
+    <div class="card">
+      <div class="form-field"><label>Your name</label><input type="text" id="su-name" placeholder="e.g. Mrs. Johnson" /></div>
+      <div class="form-field"><label>Street address</label><input type="text" id="su-address" placeholder="e.g. 1234 Desert Bloom Dr" /></div>
+      <div class="form-field"><label>Phone number (optional)</label><input type="text" id="su-phone" placeholder="e.g. 602-555-0123" /></div>
+      <div class="form-field"><label>How many cans do you have?</label>
+        <select id="su-cans">
+          <option value="1">1 can</option>
+          <option value="2">2 cans</option>
+          <option value="3">3 cans</option>
+          <option value="4">4 cans</option>
+          <option value="5+">5 or more</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Anything else we should know?</label><textarea id="su-notes" placeholder="e.g. gate code, special instructions..."></textarea></div>
+      <button class="signup-submit" onclick="submitSignup()">Sign me up!</button>
+    </div>
+  </div>
+  <div id="signup-success-view" style="display:none;">
+    <div class="success-card">
+      <div class="check">🎉</div>
+      <h3>You're signed up!</h3>
+      <p>Thanks for joining Kid's Curbside Service! We'll come by on trash day and take care of your cans. See you soon!</p>
+      <button class="back-home-btn" onclick="goToIntro()">Back to home</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="screen">
+  <button class="back-btn" onclick="goToIntro()">← back to home</button>
+  <div class="header">
+    <svg width="60" height="46" viewBox="0 0 200 134" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 4px;">
+      <g transform="translate(20,8)"><rect x="8" y="8" width="60" height="7" rx="3.5" fill="#3B6D11"/><rect x="19" y="3" width="38" height="7" rx="3.5" fill="#3B6D11"/><rect x="10" y="15" width="56" height="72" rx="6" fill="#639922"/><rect x="10" y="15" width="56" height="12" rx="4" fill="#3B6D11"/><rect x="28" y="21" width="20" height="4" rx="2" fill="#C0DD97"/></g>
+      <g transform="translate(108,8)"><rect x="8" y="8" width="60" height="7" rx="3.5" fill="#185FA5"/><rect x="19" y="3" width="38" height="7" rx="3.5" fill="#185FA5"/><rect x="10" y="15" width="56" height="72" rx="6" fill="#378ADD"/><rect x="10" y="15" width="56" height="12" rx="4" fill="#185FA5"/><g transform="translate(28,20)"><path d="M9 2.5 L18 2.5 L14.5 0 M18 2.5 L14.5 5" fill="none" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 7.5 L9 7.5 L12.5 5 M9 7.5 L12.5 10" fill="none" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+    </svg>
+    <div class="biz-name">Kid's Curbside Service</div>
+    <div class="biz-tagline">Moon Valley, Phoenix AZ · $1 per can</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="stat-cans">0</div><div class="stat-label">Cans today</div></div>
+    <div class="stat"><div class="stat-num" id="stat-earned">$0</div><div class="stat-label">Earned today</div></div>
+    <div class="stat"><div class="stat-num" id="stat-reviews">0</div><div class="stat-label">Reviews</div></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('pay')">💳 Pay</button>
+    <button class="tab" onclick="switchTab('reviews')">⭐ Reviews</button>
+    <button class="tab" onclick="switchTab('jobs')">📋 Jobs</button>
+    <button class="tab" onclick="switchTab('customers')">👥 Customers</button>
+  </div>
+  <div id="tab-pay" class="section active">
+    <div class="card">
+      <h3>How many cans?</h3>
+      <div class="amount-grid">
+        <button class="amount-btn" onclick="selectCans(1)">1 can — $1</button>
+        <button class="amount-btn" onclick="selectCans(2)">2 cans — $2</button>
+        <button class="amount-btn" onclick="selectCans(3)">3 cans — $3</button>
+        <button class="amount-btn" onclick="selectCans(4)">4 cans — $4</button>
+      </div>
+      <div class="custom-row">
+        <label>Other:</label>
+        <input type="number" id="custom-cans" min="1" max="20" placeholder="# of cans" oninput="selectCustom()" style="width:100px;" />
+        <span style="font-size:14px;color:#3B6D11;font-weight:500;" id="custom-price"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Payment method</h3>
+      <div class="pay-methods">
+        <div class="pay-method sel" id="pm-venmo" onclick="selectMethod('venmo')"><span class="pay-method-icon">💙</span>Venmo</div>
+        <div class="pay-method" id="pm-cash" onclick="selectMethod('cash')"><span class="pay-method-icon">💵</span>Cash</div>
+      </div>
+      <div class="method-info-box" id="method-info">Venmo: @KidsCurbsideService</div>
+      <div style="margin-bottom:12px;"><label style="font-size:13px;color:var(--color-text-secondary);">Customer name</label><input type="text" id="customer-name" placeholder="e.g. Mrs. Johnson" style="margin-top:4px;" /></div>
+      <button class="pay-btn" onclick="recordPayment()">✅ Mark as Paid — <span id="pay-total">$1</span></button>
+    </div>
+    <div class="toast" id="toast"></div>
+  </div>
+  <div id="tab-reviews" class="section">
+    <div class="card">
+      <h3>Leave a review</h3>
+      <div><label style="font-size:13px;color:var(--color-text-secondary);">Your name</label><input type="text" id="rev-name" placeholder="e.g. Mr. Smith" style="margin:4px 0 10px;" /></div>
+      <div><label style="font-size:13px;color:var(--color-text-secondary);">Rating</label>
+        <div class="star-pick">
+          <button class="star-btn" onclick="setStar(1)">⭐</button>
+          <button class="star-btn" onclick="setStar(2)">⭐</button>
+          <button class="star-btn" onclick="setStar(3)">⭐</button>
+          <button class="star-btn" onclick="setStar(4)">⭐</button>
+          <button class="star-btn" onclick="setStar(5)">⭐</button>
+        </div>
+      </div>
+      <div><label style="font-size:13px;color:var(--color-text-secondary);">Your review</label><textarea id="rev-text" placeholder="What did you think?" style="margin-top:4px;"></textarea></div>
+      <button class="submit-btn" onclick="submitReview()" style="margin-top:12px;">Submit Review</button>
+    </div>
+    <div id="reviews-list"></div>
+  </div>
+  <div id="tab-jobs" class="section">
+    <div class="card">
+      <h3>Payment history</h3>
+      <div id="jobs-list"><div class="empty-state">No payments yet. Go collect some money!</div></div>
+    </div>
+  </div>
+  <div id="tab-customers" class="section">
+    <div class="card">
+      <h3>Signed up customers</h3>
+      <div id="signups-list"><div class="empty-state">No sign-ups yet. Share the app with your neighbors!</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedCans=1,selectedMethod='venmo',selectedStar=0,jobs=[],reviews=[],signups=[],todayCans=0,todayEarned=0;
+const methodInfo={venmo:'Venmo: @KidsCurbsideService',cash:'Pay cash directly to me!'};
+function showScreen(id){['intro','signup','app'].forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active');}
+function goToIntro(){showScreen('intro');}
+function goToApp(){showScreen('app');selectCans(1);}
+function goToSignup(){showScreen('signup');document.getElementById('signup-form-view').style.display='block';document.getElementById('signup-success-view').style.display='none';}
+function switchTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const i=['pay','reviews','jobs','customers'].indexOf(n);document.querySelectorAll('.tab')[i].classList.add('active');document.getElementById('tab-'+n).classList.add('active');}
+function selectCans(n){selectedCans=n;document.getElementById('custom-cans').value='';document.getElementById('custom-price').textContent='';document.querySelectorAll('.amount-btn').forEach((b,i)=>b.classList.toggle('selected',i===n-1));document.getElementById('pay-total').textContent='$'+n;}
+function selectCustom(){const v=parseInt(document.getElementById('custom-cans').value);if(v>0){selectedCans=v;document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('custom-price').textContent='= $'+v;document.getElementById('pay-total').textContent='$'+v;}}
+function selectMethod(m){selectedMethod=m;document.querySelectorAll('.pay-method').forEach(e=>e.classList.remove('sel'));document.getElementById('pm-'+m).classList.add('sel');document.getElementById('method-info').textContent=methodInfo[m];}
+function recordPayment(){const name=document.getElementById('customer-name').value.trim()||'Customer';const amt=selectedCans;const now=new Date();jobs.unshift({name,cans:amt,method:selectedMethod,time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});todayCans+=amt;todayEarned+=amt;document.getElementById('stat-cans').textContent=todayCans;document.getElementById('stat-earned').textContent='$'+todayEarned;renderJobs();document.getElementById('customer-name').value='';showToast('$'+amt+' recorded from '+name+'!');}
+function renderJobs(){const el=document.getElementById('jobs-list');if(!jobs.length){el.innerHTML='<div class="empty-state">No payments yet. Go collect some money!</div>';return;}el.innerHTML=jobs.map(j=>`<div class="job-row"><div><div class="job-name">${j.name}</div><div class="job-detail">${j.cans} can${j.cans>1?'s':''} · ${j.method} · ${j.time}</div></div><div class="job-amt">$${j.cans}</div></div>`).join('');}
+function setStar(n){selectedStar=n;document.querySelectorAll('.star-btn').forEach((b,i)=>b.classList.toggle('lit',i<n));}
+function submitReview(){const name=document.getElementById('rev-name').value.trim()||'Anonymous';const text=document.getElementById('rev-text').value.trim();if(!text){showToast('Please write something!');return;}if(!selectedStar){showToast('Please pick a star rating!');return;}reviews.unshift({name,text,stars:selectedStar,date:new Date().toLocaleDateString()});document.getElementById('rev-name').value='';document.getElementById('rev-text').value='';selectedStar=0;document.querySelectorAll('.star-btn').forEach(b=>b.classList.remove('lit'));document.getElementById('stat-reviews').textContent=reviews.length;renderReviews();showToast('Thanks for the review, '+name+'!');}
+function renderReviews(){const el=document.getElementById('reviews-list');el.innerHTML=reviews.map(r=>`<div class="review-card"><div class="review-header"><div class="reviewer-name">${r.name}</div><div class="stars-display">${'⭐'.repeat(r.stars)}</div></div><div class="review-text">${r.text}</div><div class="review-date">${r.date}</div></div>`).join('');}
+function submitSignup(){const name=document.getElementById('su-name').value.trim();const address=document.getElementById('su-address').value.trim();if(!name||!address){alert('Please enter your name and address!');return;}const phone=document.getElementById('su-phone').value.trim();const cans=document.getElementById('su-cans').value;const notes=document.getElementById('su-notes').value.trim();signups.unshift({name,address,phone,cans,notes,date:new Date().toLocaleDateString()});renderSignups();document.getElementById('signup-form-view').style.display='none';document.getElementById('signup-success-view').style.display='block';}
+function renderSignups(){const el=document.getElementById('signups-list');if(!signups.length){el.innerHTML='<div class="empty-state">No sign-ups yet. Share the app with your neighbors!</div>';return;}el.innerHTML=signups.map((s,i)=>`<div class="signup-row"><div><div class="signup-name">${s.name} ${i===0?'<span class="new-badge">new</span>':''}</div><div class="signup-detail">${s.address}${s.phone?' · '+s.phone:''} · ${s.cans} can${s.cans!=='1'?'s':''}</div>${s.notes?`<div class="signup-detail" style="color:#3B6D11;margin-top:2px;">Note: ${s.notes}</div>`:''}</div></div>`).join('');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none';},2500);}
+</script>
